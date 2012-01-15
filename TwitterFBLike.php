@@ -8,7 +8,6 @@
  * @subpackage Extensions
  * @author Barry Coughlan
  * @copyright ? 2010 Barry Coughlan
- * @copyright ? 2012 Daijin
  * @licence GNU General Public Licence 2.0 or later
  */
 
@@ -86,12 +85,15 @@ function twitterFBLikeParserFunction_Render( &$parser, $param1 = '', $param2 = '
 		$text = str_replace("\"", "\\\"", $title->getFullText() . " - " . $wgSitename);
 
 		/* Customize: addition config */
-		$twitterUser = "daijin";
+		$twitterVia     = "";
+		$twitterRelated = "celestia_pj";
+		$twitterHash    = "celestiaX";
 
 		/* Customize: addition data-via and data-related */
 		$output = '<div class="twitterFBLike_'.$size.' twitterFBLike_'.$urltitle.'" style="float: '.$float.'">
 					   <a style="display: none" href="http://twitter.com/share" 
-					   class="twitter-share-button" data-text="'.$text.'" data-via="'.$twitterUser.'" data-related="'.$twitterUser.'"
+					   class="twitter-share-button" data-text="'.$text.'" data-via="'.$twitterVia.'"
+					   data-related="'.$twitterRelated.'" data-hashtags="'.$twitterHash.'"
 					   data-url="'.$url.'" '.$twitterextra.' >Tweet</a>
 					   <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 					   <iframe src="http://www.facebook.com/plugins/like.php?href='.$url.'&layout='.$layout.
