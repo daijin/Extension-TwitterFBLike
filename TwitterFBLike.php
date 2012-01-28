@@ -43,65 +43,65 @@ function twitterFBLikeParserFeedHead(&$out, &$sk) {
 }
 
  
-function twitterFBLikeParserFunction_Render( &$parser, $param1 = '', $param2 = '', $param3 = '' ) {
-		global $wgSitename;
+function twitterFBLikeParserFunction_Render( &$parser, $param1 = '', $param2 = '', $param3 = '', $twitterVia = '' ) {
+	global $wgSitename;
 	
-		if ($param1 === "left" || $param1 === "right") {
-			$float = $param1;
-		} else {
-			$float = "none";
-		}
-		
-		if ($param2 === "small") {
-			$twitterextra="";
-			$size="small";
-			$linebreak = "";
-			$layout = "button_count";
-			$height = "21";
-		} else {
-			$twitterextra="data-count=\"vertical\"";
-			$size="big";
-			$layout = "box_count";
-			$linebreak = "<br />";
-			$height = "65";
-		}
-		
-		if ($param3 === "like") {
-			$width = 75;
-			$action="like";
-		} else {
-			$width = 115;
-			$action="recommend";
-		}
-		
-		//Get page title and URL
-		$title = $parser->getTitle();
-		if (!$title) return "";
-		$urltitle = $title->getPartialURL(); //e.g. "Main_Page"
-		$url = $title->getFullURL();
-		if (!$url ) return "";
-		
-		//$text = str_replace("\"", "\\\"", $wgSitename . ": " . $title->getFullText());
-		$text = str_replace("\"", "\\\"", $title->getFullText() . " - " . $wgSitename);
+	if ($param1 === "left" || $param1 === "right") {
+		$float = $param1;
+	} else {
+		$float = "none";
+	}
+	
+	if ($param2 === "small") {
+		$twitterextra="";
+		$size="small";
+		$linebreak = "";
+		$layout = "button_count";
+		$height = "21";
+	} else {
+		$twitterextra="data-count=\"vertical\"";
+		$size="big";
+		$layout = "box_count";
+		$linebreak = "<br />";
+		$height = "65";
+	}
+	
+	if ($param3 === "like") {
+		$width = 75;
+		$action="like";
+	} else {
+		$width = 115;
+		$action="recommend";
+	}
+	
+	//Get page title and URL
+	$title = $parser->getTitle();
+	if (!$title) return "";
+	$urltitle = $title->getPartialURL(); //e.g. "Main_Page"
+	$url = $title->getFullURL();
+	if (!$url ) return "";
+	
+	//$text = str_replace("\"", "\\\"", $wgSitename . ": " . $title->getFullText());
+	$text = str_replace("\"", "\\\"", $title->getFullText() . " - " . $wgSitename);
+	
+	/* Customize: addition config */
+	// $twitterVia     = "";
+	$twitterRelated = "celestia_pj";
+	$twitterHash    = "celestiaX";
 
-		/* Customize: addition config */
-		$twitterVia     = "";
-		$twitterRelated = "celestia_pj";
-		$twitterHash    = "celestiaX";
-
-		/* Customize: addition data-via and data-related */
-		$output = '<div class="twitterFBLike_'.$size.' twitterFBLike_'.$urltitle.'" style="float: '.$float.'">
-					   <a style="display: none" href="http://twitter.com/share" 
-					   class="twitter-share-button" data-text="'.$text.'" data-via="'.$twitterVia.'"
-					   data-related="'.$twitterRelated.'" data-hashtags="'.$twitterHash.'"
-					   data-url="'.$url.'" '.$twitterextra.' >Tweet</a>
-					   <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
-					   <iframe src="http://www.facebook.com/plugins/like.php?href='.$url.'&layout='.$layout.
-					   '&show_faces=false&width=450&action='.$action.'&colorscheme=light&height=65"
-					   scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:'.$width.'px; height:'.$height.'px;"
-					   allowTransparency="true"></iframe>
-				   </div>';
-				   
-				   //
-		return $parser->insertStripItem($output, $parser->mStripState);;
+	/* Customize: addition data-via and data-related */
+	$output = '<div class="twitterFBLike_'.$size.' twitterFBLike_'.$urltitle.'" style="float: '.$float.'">
+				   <a style="display: none" href="http://twitter.com/share" 
+				   class="twitter-share-button" data-text="'.$text.'" data-via="'.$twitterVia.'"
+				   data-related="'.$twitterRelated.'" data-hashtags="'.$twitterHash.'"
+				   data-url="'.$url.'" '.$twitterextra.' >Tweet</a>
+				   <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+				   <iframe src="http://www.facebook.com/plugins/like.php?href='.$url.'&layout='.$layout.
+				   '&show_faces=false&width=450&action='.$action.'&colorscheme=light&height=65"
+				   scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:'.$width.'px; height:'.$height.'px;"
+				   allowTransparency="true"></iframe>
+			   </div>';
+			   
+			   //
+	return $parser->insertStripItem($output, $parser->mStripState);;
 }
